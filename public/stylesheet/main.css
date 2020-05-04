@@ -1,0 +1,20 @@
+body {
+	background: #dae1e7;
+}
+#deletepostlink {
+	color: red;
+}
+.faqimg {
+	width: 40%;
+	height: 40%;
+}
+.navbar-dark {
+	background-color: #27496d;
+}
+.jumbotron {
+	background-color: #dae1e7;
+}
+#searchbox {
+	width: 150px;
+	margin-right: 5px;
+}

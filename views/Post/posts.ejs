@@ -1,0 +1,84 @@
+
+   <%- include ("../partials/header") %> 
+   <title>Posts</title>
+  <body>
+    <div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Posts</h1>
+        <p class="lead">View everything posted in KIIT-ASK here or post your own by clicking the big blue button below!</p>
+        <hr class="my-4">
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
+        Post Something!
+      </button>
+      </div>
+    </div>
+      <% console.log(userInfo) %> 
+      <div class="container">
+    <div class="card-columns">
+          <% posts.forEach(element => { %>
+            <a href="/posts/<%= element.id%>/">
+            <div class="card p-3 shadow-sm mb-5 bg-white rounded">
+              <blockquote class="blockquote mb-0 card-body">
+                <p><%- element.title %> </p>
+                <footer class="blockquote-footer">
+                  <small class="text-muted">
+                  <cite title="Source Title"><%= element.author.username%> </cite>
+                  </small>
+                </footer>
+              </blockquote>
+            </div>
+         <% }); %> 
+      </div>
+      </a>
+      </div>
+
+
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <% if(!userInfo){ %>
+                <h5 class="modal-title" id="noLogin">You need to Login in order to post!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+              <div class="modal-body">
+                <a href="Login" class="btn btn-primary">Login</a>
+              </div>
+          </div>
+              <% }else{ %>
+              <h5 class="modal-title" id="exampleModalLabel">New Post</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="/posts" method="POST">
+                <div class="form-group">
+                  <label for="Title">Title</label>
+                  <input type="text" name="title" class="form-control" id="Title" aria-describedby="title" required>
+                  <div class="invalid-feedback">
+                    Please choose a username.
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="Desciption">Desciption</label>
+                    <textarea name= "description"class="form-control" id="Desciption" rows="3"></textarea>
+                    <small id="emailHelp" name="description" class="form-text text-muted">Add a small description describing your post</small>
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" >Post!</button>
+            </div>
+          </from>
+          </div>
+          <% } %> 
+        </div>
+      </div>
+      <%- include ("../partials/footer") %> 
+  </body>
+</html>

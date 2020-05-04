@@ -1,0 +1,73 @@
+
+  <%- include ("../partials/header") %> 
+  <title><%=foundPost.title  %> </title>
+  <body >
+    <br><br>
+    <div class="container">
+        <div class="col-md-10 m-auto">
+          <div class="card shadow mb-5 bg-white rounded">
+            <div class="card-header">
+              <%=foundPost.author.username  %>
+              <span class="float-right"><%=foundPost.created_at.toLocaleDateString()  %> </span>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><%-foundPost.title  %> </h5>
+              <p class="card-text" style="white-space: pre-wrap;"><%- foundPost.description  %></p>
+              <!-- <a href="#" class="card-link">Upvote</a>
+              <a href="#" class="card-link">Downvote</a> -->
+              <% if(userInfo!=null && userInfo.post.includes(foundPost._id)){ %>
+                <a href="#" class="card-link float-right" id="deletepostlink" data-toggle="modal" data-target="#deleteModal">Delete Post</a>
+              <% } %> 
+            </ul>
+            </div>
+          </div>
+          <hr>
+          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to delete this post? This action can't be undone.
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                  <form class="d-inline" action="/posts/<%= foundPost._id %>?_method=DELETE " method="POST">
+                    <button type="submit" class="btn btn-danger">Yes</a>  
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% foundPost.comment.forEach(element => { %>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= element.author %></h5>
+              <p><%-element.text %></p>
+              <% if(userInfo && userInfo.comment.includes(element.id)){ %>
+                <form action="/posts/<%=foundPost.id%>/<%= element.id%>?_method=DELETE" method="POST">
+                  <button class="btn btn-link card-link float-right">Delete</button>
+                </form>
+              <% } %> 
+            </div>
+          </div>
+          <br>
+        <% }); %> 
+          <br>
+          <form action="/posts/<%=foundPost._id%>/new" method="POST">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Add all your comments or answers here</label>
+              <textarea class="form-control" name="commentContent" id="exampleFormControlTextarea1" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Comment</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%- include ("../partials/footer") %> 
+  </body>
+</html>

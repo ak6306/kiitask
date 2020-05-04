@@ -1,0 +1,29 @@
+<%- include ("../partials/header") %> 
+  <body style="display: flex; width: 100%; height: 600px; justify-content: center; align-items: center;">
+      <div class="shadow-sm p-3 mb-5 bg-white rounded" style="align-items: center; justify-content: center;width:500px;">
+    <form action="/posts" method="POST">
+        <div class="form-group">
+          <label for="Title">Title</label>
+          <input type="text" name="title" class="form-control" id="Title" aria-describedby="title" required>
+          <div class="invalid-feedback">
+            Please choose a username.
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="Desciption">Desciption</label>
+            <textarea name= "description"class="form-control" id="Desciption" rows="3"></textarea>
+            <small id="emailHelp" name="description" class="form-text text-muted">Add a small description describing your post</small>
+          </div>
+
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      </div>
+      </div>
+
+      <%- include ("../partials/footer") %> 
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<%- include ("../partials/header") %> 
+<title><%=userInfo.username  %> </title>
+<body>
+  <div class="container shadow" style="margin-top: 3%;">
+    <div class="row p-4">
+      <div class="col-md-6">
+        <h4>Hello! <strong><%=userInfo.username%></strong></h4>
+        <p>You can view your posts here</p>
+      </div>
+    </div>
+<div class="card-columns">
+      <% userInfo.post.forEach(element => {console.log(element) %>
+        <a href="/posts/<%= element.id%>/">
+        <div class="card p-3">
+          <blockquote class="blockquote mb-0 card-body">
+            <p><%- element.title %> </p>
+            <footer class="blockquote-footer">
+              <small class="text-muted">
+              <cite title="Source Title"><%= element.author.username  %> </cite>
+              </small>
+            </footer>
+          </blockquote>
+        </div>
+        </a>
+     <% }); %>
+</div> 
+  </div>
+  </div>
+  <%- include ("../partials/footer") %> 
+  </body>
