@@ -5,6 +5,20 @@ var Post = require('../models/post');
 var Comment = require('../models/comment');
 var User = require('../models/user');
 var middleware = require('../middleware/index');
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+
+var username = process.env.username;
+var password = process.env.password;
+var transporter = nodemailer.createTransport(
+	smtpTransport({
+		service: 'gmail',
+		auth: {
+			user: username,
+			pass: password
+		}
+	})
+);
 
 router.get('/posts', (req, res) => {
 	Post.find({}).sort({ _id: -1 }).exec((err, posts) => {
@@ -22,7 +36,8 @@ router.post('/posts', middleware.isLoggedIn, (req, res) => {
 		id: req.user.id,
 		username: req.user.username,
 		school: req.user.school,
-		year: req.user.year
+		year: req.user.year,
+		email: req.user.email
 	};
 	var newPost = { title: title, description: description, author: author };
 	Post.create(newPost)
@@ -67,6 +82,22 @@ router.post('/posts/:id/new', middleware.isLoggedIn, (req, res) => {
 					});
 					post.comment.push(comment);
 					post.save().then(() => {
+						var mailOptions = {
+							from: 'KIIT ASK<username>',
+							to: post.author.email,
+							subject: 'Notification from KIIT ASK',
+							html:
+								'<h1>Hello!</h1><br><h3>Someone commeted on one of your posts.</h3><br><a href="https://kiitask.herokuapp.com/posts/' +
+								post.id +
+								'">Click here to view your post on KIIT ASK.</a><hr>'
+						};
+						transporter.sendMail(mailOptions, function(error, info) {
+							if (error) {
+								console.log(error);
+							} else {
+								console.log('Email sent: ' + info.response);
+							}
+						});
 						res.redirect('/posts/' + post.id);
 					});
 				})
