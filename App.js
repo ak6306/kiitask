@@ -7,7 +7,6 @@ var LocalStrategy = require('passport-local');
 var User = require('./models/user');
 var Post = require('./models/post');
 var Comment = require('./models/comment');
-const PORT = 3000;
 var postRoutes = require('./routes/post');
 var indexRoutes = require('./routes/index');
 var userRoutes = require('./routes/user');
@@ -53,7 +52,8 @@ app.use(indexRoutes);
 app.use(postRoutes);
 app.use(userRoutes);
 
-app.listen(process.env.PORT, process.env.IP, function() {
+const PORT = process.env.PORT || 3000;
+	app.listen(process.env.PORT, function() {
 	console.log('The KIIT ASK server has started! ');
 	console.log(`Listing on port ${PORT}`);
 });
