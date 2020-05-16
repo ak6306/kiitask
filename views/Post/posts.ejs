@@ -16,7 +16,7 @@
       <div class="container">
     <div class="card-columns">
           <% posts.forEach(element => { %>
-            <a href="/posts/<%= element.id%>/">
+            <a href="/posts/<%= element.id%>/" target='_blank'> 
             <div class="card p-3 shadow-sm mb-5 bg-white rounded">
               <blockquote class="blockquote mb-0 card-body">
                 <p><%- element.title %> </p>
