@@ -1,6 +1,6 @@
 body {
 	background: #dae1e7;
-x`	overflow-x: hidden;
+	overflow-x: hidden;
 }
 #deletepostlink {
 	color: red;
@@ -18,4 +18,7 @@ x`	overflow-x: hidden;
 #searchbox {
 	width: 150px;
 	margin-right: 5px;
+}
+.whitespace {
+	white-space: pre-wrap;
 }

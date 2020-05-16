@@ -52,8 +52,9 @@ app.use(indexRoutes);
 app.use(postRoutes);
 app.use(userRoutes);
 
+
 const PORT = process.env.PORT || 3000;
-	app.listen(process.env.PORT, function() {
+	app.listen(PORT, function() {
 	console.log('The KIIT ASK server has started! ');
 	console.log(`Listing on port ${PORT}`);
 });

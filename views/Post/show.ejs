@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
               <h5 class="card-title"><%-foundPost.title  %> </h5>
-              <p class="card-text" style="white-space: pre-wrap;"><%- foundPost.description  %></p>
+              <p class="card-text whitespace" ><%- foundPost.description  %></p>
               <!-- <a href="#" class="card-link">Upvote</a>
               <a href="#" class="card-link">Downvote</a> -->
               <% if(userInfo!=null && userInfo.post.includes(foundPost._id)){ %>
@@ -47,7 +47,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><%= element.author %></h5>
-              <p><%-element.text %></p>
+              <p class="whitespace"><%-element.text %></p>
               <% if(userInfo && userInfo.comment.includes(element.id)){ %>
                 <form action="/posts/<%=foundPost.id%>/<%= element.id%>?_method=DELETE" method="POST">
                   <button class="btn btn-link card-link float-right">Delete</button>
