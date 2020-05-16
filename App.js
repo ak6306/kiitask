@@ -11,12 +11,10 @@ const PORT = 3000;
 var postRoutes = require('./routes/post');
 var indexRoutes = require('./routes/index');
 var userRoutes = require('./routes/user');
-var methodOverride = require('method-override');
 var flash = require('connect-flash');
 //==========Setup============
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
 app.use(flash());
 
