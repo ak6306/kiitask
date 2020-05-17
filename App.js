@@ -6,17 +6,14 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var User = require('./models/user');
 var Post = require('./models/post');
-const PORT = 3000;
 var Comment = require('./models/comment');
 var postRoutes = require('./routes/post');
 var indexRoutes = require('./routes/index');
 var userRoutes = require('./routes/user');
-var methodOverride = require('method-override');
 var flash = require('connect-flash');
 //==========Setup============
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
 app.use(flash());
 
@@ -55,7 +52,9 @@ app.use(indexRoutes);
 app.use(postRoutes);
 app.use(userRoutes);
 
-app.listen(process.env.PORT, function() {
+
+const PORT = process.env.PORT || 3000;
+	app.listen(PORT, function() {
 	console.log('The KIIT ASK server has started! ');
 	console.log(`Listing on port ${PORT}`);
 });

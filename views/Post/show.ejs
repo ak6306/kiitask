@@ -7,8 +7,7 @@
         <div class="col-md-10 m-auto">
           <div class="card shadow mb-5 bg-white rounded">
             <div class="card-header">
-              <%=foundPost.author.username  %>
-             
+              <a href="/user/<%=foundPost.author._id%>/"><%=foundPost.author.username  %></a>
               <span class="float-right"><%=foundPost.created_at.toLocaleDateString()  %> </span>
             </div>
             <div class="card-body">
